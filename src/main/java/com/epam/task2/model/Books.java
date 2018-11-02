@@ -3,6 +3,7 @@ package com.epam.task2.model;
 import com.epam.task2.data.DataSource;
 import com.epam.task2.entity.Book;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Books {
@@ -46,8 +47,8 @@ public class Books {
         }
         return Arrays.copyOf(temp, counter);
     }
-    public Book[] sortByPublisher () {
-        Book[] temp = DataSource.getBooks();
+    public Book[] sortByPublisher () throws IOException {
+        Book[] temp = getBooks();
         Arrays.sort(temp, new PublisherComparator());
 
         return temp;

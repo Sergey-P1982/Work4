@@ -5,6 +5,7 @@ import com.epam.task2.entity.Book;
 import com.epam.task2.model.Books;
 import com.epam.task2.view.BooksView;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Controller {
@@ -12,8 +13,9 @@ public class Controller {
     private BooksView view = new BooksView();
     Scanner scan = new Scanner(System.in);
 
-    public void run() {
-        model.setBooks(DataSource.getBooks());
+    public void run() throws IOException {
+
+        model.setBooks(DataSource.readAndGetBooksFromTxtFile());
         String moreMenu = "Y";
         do {
             view.printMenu();
@@ -29,7 +31,7 @@ public class Controller {
         } while (moreMenu.equalsIgnoreCase("Y"));
     }
 
-    private void executeMenuItem(int number) {
+    private void executeMenuItem(int number) throws IOException {
         switch (number) {
             case (1):
                 view.printMessage("Enter author name: ");
@@ -98,7 +100,7 @@ public class Controller {
         }
     }
 
-    private void sortByPublisher() {
+    private void sortByPublisher() throws IOException {
         view.printBooks("Books after sorting by publisher: ", model.sortByPublisher());
 
     }

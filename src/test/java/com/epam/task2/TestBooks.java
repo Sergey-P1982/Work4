@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -35,7 +36,7 @@ public class TestBooks {
     public Book[] expBooksAfterYearRelease;
 
     @Parameterized.Parameters
-    public static Collection data() {
+    public static Collection data() throws IOException {
         init();
 
         return Arrays.asList(new Object[][]{
@@ -43,15 +44,15 @@ public class TestBooks {
                         new Book[]{books.getBooks()[2], books.getBooks()[3]}},
                 {"Ivanov", "TIME", 2015, new Book[]{books.getBooks()[2]}, new Book[]{books.getBooks()[0]},
                         new Book[]{}},
-                {"Frank", "VEL", 1919, new Book[]{}, new Book[]{}, DataSource.getBooks()},
+                {"Frank", "VEL", 1919, new Book[]{}, new Book[]{}, DataSource.readAndGetBooksFromTxtFile()},
 
         });
     }
 
     @BeforeClass
-    public static void init() {
+    public static void init() throws IOException {
         books = new Books();
-        books.setBooks(DataSource.getBooks());
+        books.setBooks(DataSource.readAndGetBooksFromTxtFile());
 
     }
 
@@ -74,7 +75,7 @@ public class TestBooks {
     }
 
     @Test
-    public void TestSortByPyblisher() {
+    public void TestSortByPyblisher() throws IOException {
         Book[] sortedBooks = books.sortByPublisher();
         Book[] expectedSortedBooks = new Book[]
                 {new Book("Title2", "Tkachenko", "DUH", 1978, 420, 480.0),
