@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 public class Books {
     private Book[] books;
+    public Books () {}
 
     public Book[] getBooks() {
         return books;
@@ -18,6 +19,7 @@ public class Books {
     }
 
     public Book[] getByAuthor (String author) {
+
         Book[] temp = new Book[books.length];
         int counter = 0;
         for (int i = 0; i< books.length; i++) {

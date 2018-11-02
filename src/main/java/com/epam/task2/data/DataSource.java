@@ -33,7 +33,7 @@ public class DataSource {
                 inputLine = reader.readLine();
                 String[] token = inputLine.split(",");
                 if (token.length == 6) {
-                    books[i] = new Book(token[0], token[1], token[2], Integer.parseInt(token[3].trim()),
+                    books[i] = new Book(token[0].trim(), token[1].trim(), token[2].trim(), Integer.parseInt(token[3].trim()),
                             Integer.parseInt(token[4].trim()), Double.parseDouble(token[5].trim()));
                 }
             }
